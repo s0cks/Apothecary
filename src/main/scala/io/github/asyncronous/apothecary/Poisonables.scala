@@ -1,10 +1,13 @@
 package io.github.asyncronous.apothecary
 
-import scala.collection.JavaConversions._
 import java.util
+
 import io.github.asyncronous.apothecary.poison._
+import net.minecraft.entity.Entity
 import net.minecraft.init.Items
 import net.minecraft.item.Item
+
+import scala.collection.JavaConversions._
 
 object Poisonables{
   private val items: util.List[Item] = new util.LinkedList[Item]();
@@ -40,5 +43,17 @@ object Poisonables{
     }
 
     return null;
+  }
+
+  def attackHigh(e: Entity): Unit ={
+    e.attackEntityFrom(Apothecary.dmgHigh, 10.0F);
+  }
+
+  def attackMed(e: Entity): Unit ={
+    e.attackEntityFrom(Apothecary.dmgMed, 8.0F);
+  }
+
+  def attackLow(e: Entity): Unit ={
+    e.attackEntityFrom(Apothecary.dmgLow, 2.0F);
   }
 }

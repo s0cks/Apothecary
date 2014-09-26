@@ -1,8 +1,8 @@
 package io.github.asyncronous.apothecary.handler
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
-import io.github.asyncronous.apothecary.poison.{PoisonOleander, PoisonNightshade}
-import net.minecraft.util.DamageSource
+import io.github.asyncronous.apothecary.Poisonables
+import io.github.asyncronous.apothecary.poison.{PoisonNightshade, PoisonOleander, PoisonRicin}
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent
 
 object PoisonHandler{
@@ -14,7 +14,7 @@ object PoisonHandler{
       }
 
       if(e.entityLiving.worldObj.rand.nextInt(20) == 0){
-        e.entity.attackEntityFrom(DamageSource.generic, 10.0F);
+        Poisonables.attackMed(e.entity);
       }
     }
   }
@@ -27,7 +27,20 @@ object PoisonHandler{
       }
 
       if(e.entityLiving.worldObj.rand.nextInt(20) == 0){
-        e.entity.attackEntityFrom(DamageSource.generic, 20.0F);
+        Poisonables.attackLow(e.entity);
+      }
+    }
+  }
+
+  @SubscribeEvent
+  def onEntityUpdate_ricin(e: LivingUpdateEvent): Unit ={
+    if(e.entityLiving.isPotionActive(PoisonRicin.getId())){
+      if(e.entityLiving.getActivePotionEffect(PoisonRicin).getDuration() == 0){
+        e.entityLiving.removePotionEffect(PoisonRicin.getId());
+      }
+
+      if(e.entityLiving.worldObj.rand.nextInt(20) == 0){
+        Poisonables.attackHigh(e.entity);
       }
     }
   }

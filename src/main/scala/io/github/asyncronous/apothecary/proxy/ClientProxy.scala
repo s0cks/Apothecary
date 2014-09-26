@@ -5,6 +5,8 @@ import cpw.mods.fml.common.registry.GameRegistry
 import io.github.asyncronous.apothecary.block.BlockVial
 import io.github.asyncronous.apothecary.render.VialRenderer
 import io.github.asyncronous.apothecary.tile.TileEntityVial
+import net.minecraft.item.Item
+import net.minecraftforge.client.MinecraftForgeClient
 
 class ClientProxy
 extends CommonProxy{
@@ -18,6 +20,7 @@ extends CommonProxy{
     BlockVial.setRenderID(vialId);
     ClientRegistry.bindTileEntitySpecialRenderer(classOf[TileEntityVial], vialTESR);
     RenderingRegistry.registerBlockHandler(vialTESR);
+    MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockVial), vialTESR);
   }
 
   override def registerHandlers(): Unit ={

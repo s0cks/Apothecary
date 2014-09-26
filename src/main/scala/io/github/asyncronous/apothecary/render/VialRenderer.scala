@@ -4,14 +4,18 @@ import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.RenderBlocks
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
+import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.ResourceLocation
 import net.minecraft.world.IBlockAccess
+import net.minecraftforge.client.IItemRenderer
+import net.minecraftforge.client.IItemRenderer.{ItemRendererHelper, ItemRenderType}
 import org.lwjgl.opengl.GL11
 
 class VialRenderer(val id: Int)
 extends TileEntitySpecialRenderer
-with ISimpleBlockRenderingHandler{
+with ISimpleBlockRenderingHandler
+with IItemRenderer{
   private val model: ModelVial = new ModelVial();
   private val texture: ResourceLocation = new ResourceLocation("apot", "textures/block/vial.png");
 
@@ -31,15 +35,26 @@ with ISimpleBlockRenderingHandler{
     return true;
   }
 
-  override def renderInventoryBlock(block: Block, metadata: Int, modelId: Int, renderer: RenderBlocks): Unit ={
-    this.bindTexture(this.texture);
-    GL11.glPushMatrix();
-    GL11.glTranslated(-0.5D, -0.5D + -1.0D / 16.0D, -0.5D);
-    model.render();
-    GL11.glPopMatrix();
-  }
+  override def renderInventoryBlock(block: Block, metadata: Int, modelId: Int, renderer: RenderBlocks): Unit ={}
 
   override def renderWorldBlock(world: IBlockAccess, x: Int, y: Int, z: Int, block: Block, modelId: Int, renderer: RenderBlocks): Boolean={
     return true;
+  }
+
+  override def handleRenderType(item: ItemStack, `type`: ItemRenderType): Boolean ={
+    return true;
+  }
+
+  override def shouldUseRenderHelper(`type`: ItemRenderType, item: ItemStack, helper: ItemRendererHelper): Boolean ={
+    return true;
+  }
+
+  override def renderItem(`type`: ItemRenderType, item: ItemStack, data: AnyRef*): Unit ={
+    this.bindTexture(this.texture);
+    GL11.glPushMatrix();
+    GL11.glScalef(1.5F, 1.5F, 1.5F);
+    GL11.glTranslated(0.5D, 0.5D, 0.5D);
+    this.model.render();
+    GL11.glPopMatrix();
   }
 }

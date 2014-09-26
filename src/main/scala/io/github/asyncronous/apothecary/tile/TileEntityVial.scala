@@ -24,7 +24,7 @@ extends TileEntity{
 
   override def writeToNBT(comp: NBTTagCompound): Unit ={
     super.writeToNBT(comp);
-    if(this.poison == null){
+    if(this.poison != null){
       comp.setString("poison_id", this.poison.id());
       comp.setInteger("uses", this.uses);
     }

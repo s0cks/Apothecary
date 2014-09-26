@@ -1,7 +1,10 @@
 package io.github.asyncronous.apothecary.poison
 
+import io.github.asyncronous.apothecary.Apothecary
+import io.github.asyncronous.apothecary.anot.Medium
 import net.minecraft.potion.Potion
 
+@Medium
 object PoisonNightshade
 extends Potion(22, true, 0)
 with Poison{
@@ -12,7 +15,7 @@ with Poison{
   }
 
   override def maxUses(): Int ={
-    return 4;
+    return Apothecary.usesMed;
   }
 
   override def uid(): Int ={
