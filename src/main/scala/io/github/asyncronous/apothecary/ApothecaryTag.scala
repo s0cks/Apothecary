@@ -4,7 +4,7 @@ import net.minecraft.item.ItemStack
 import net.minecraft.nbt.NBTTagCompound
 
 object ApothecaryTag{
-  def IDENTIFIER = "exo";
+  def IDENTIFIER = "apot";
 
   def getTag(stack: ItemStack): NBTTagCompound={
     if(stack == null){
