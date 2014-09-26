@@ -1,14 +1,18 @@
 package io.github.asyncronous.apothecary.block
 
+import java.util.Random
+
+import cpw.mods.fml.relauncher.{Side, SideOnly}
 import io.github.asyncronous.apothecary.item.ItemPoison
 import io.github.asyncronous.apothecary.tile.TileEntityVial
 import io.github.asyncronous.apothecary.{ApothecaryTag, PoisonVial, Poisonables}
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
 import net.minecraft.creativetab.CreativeTabs
+import net.minecraft.entity.EntityLivingBase
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.item.ItemStack
+import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.{ChatComponentText, MovingObjectPosition}
@@ -20,14 +24,33 @@ extends BlockContainer(Material.glass){
 
   this.setCreativeTab(CreativeTabs.tabBrewing);
   this.setBlockBounds(0.4F, 0.0F, 0.4F, 0.6F, 0.5F, 0.6F);
+  this.setBlockName("vial");
 
+  override def onBlockPlacedBy(world: World, x: Int, y: Int, z: Int, living: EntityLivingBase, stack: ItemStack): Unit ={
+    val tile: TileEntityVial = world.getTileEntity(x, y, z).asInstanceOf[TileEntityVial];
+    val comp: NBTTagCompound = ApothecaryTag.getTag(stack);
+    tile.poison = Poisonables.getById(comp.getString("poison_name"));
+    tile.uses = comp.getInteger("poison_uses");
+  }
+
+  override def quantityDropped(rand: Random): Int={
+    return 0;
+  }
+
+  override def getItemDropped(i: Int, rand: Random, j: Int): Item={
+    return null;
+  }
+
+  @SideOnly(Side.CLIENT)
   override def onBlockActivated (world: World, x: Int, y: Int, z: Int, player : EntityPlayer, p_149727_6_ : Int, p_149727_7_ : Float, p_149727_8_ : Float, p_149727_9_ : Float): Boolean ={
     val stack: ItemStack = player.getCurrentEquippedItem();
     val tile: TileEntityVial = world.getTileEntity(x, y, z).asInstanceOf[TileEntityVial];
     if(stack == null){
       if(tile.poison != null){
-        player.addChatMessage(new ChatComponentText("Current Poison: " + tile.poison.id()));
-        player.addChatMessage(new ChatComponentText("Uses Left: " + tile.uses));
+        if(!world.isRemote){
+          player.addChatMessage(new ChatComponentText("Current Poison: " + tile.poison.id()));
+          player.addChatMessage(new ChatComponentText("Uses Left: " + tile.uses));
+        }
       }
     } else if(stack.getItem().isInstanceOf[ItemPoison] &&
               tile.poison == null){
@@ -44,6 +67,7 @@ extends BlockContainer(Material.glass){
     return true;
   }
 
+  @SideOnly(Side.CLIENT)
   override def removedByPlayer(world: World, player: EntityPlayer, x: Int, y: Int, z: Int, harvest: Boolean): Boolean={
     if(!player.capabilities.isCreativeMode &&
        !world.isRemote &&
@@ -55,9 +79,9 @@ extends BlockContainer(Material.glass){
       val motZ: Double = (world.rand.nextFloat() * motion) + (1.0F - motion) * 0.5D;
       val eItem: EntityItem = new EntityItem(world, x + motX, y + motY, z + motZ, this.getPickBlock(null, world, x, y, z));
       world.spawnEntityInWorld(eItem);
-    } else{
-      return world.setBlockToAir(x, y, z);
     }
+
+    return world.setBlockToAir(x, y, z);
   }
 
   override def getPickBlock(t: MovingObjectPosition, world: World, x: Int, y: Int, z: Int): ItemStack={

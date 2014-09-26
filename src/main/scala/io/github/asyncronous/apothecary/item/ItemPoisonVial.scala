@@ -1,7 +1,7 @@
 package io.github.asyncronous.apothecary.item
 
 import io.github.asyncronous.apothecary.poison.Poison
-import io.github.asyncronous.apothecary.{Poisonables, ApothecaryTag, PoisonVial}
+import io.github.asyncronous.apothecary.{ApothecaryTag, PoisonVial, Poisonables}
 import net.minecraft.block.Block
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.{ItemBlock, ItemStack}
@@ -14,6 +14,14 @@ with PoisonVial{
   this.setMaxStackSize(1);
   this.setNoRepair();
   this.setCreativeTab(CreativeTabs.tabBrewing);
+
+  override def getUnlocalizedName(stack: ItemStack): String={
+    if(this.getPoison(stack) != null){
+      return this.getUnlocalizedName() + "." + this.getPoison(stack).id();
+    } else{
+      return this.getUnlocalizedName();
+    }
+  }
 
   override def setPoison(s: ItemStack, p: Poison): Unit ={
     val comp: NBTTagCompound = ApothecaryTag.getTag(s);

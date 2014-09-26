@@ -1,2 +1,10 @@
-potion.oleanderPoison=Oleander Poison
-potion.nightshadePoison=Nightshade Poison
+# Items
+item.poison.ricin.name=Ricin Poison
+item.poison.oleander.name=Oleander Poison
+item.poison.nightshade.name=Nightshade Poison
+
+# Blocks
+tile.vial.name=Vial
+tile.vial.ricin.name=Vial of Ricin
+tile.vial.nightshade.name=Vial of Nightshade
+tile.vial.oleander.name=Vial of Oleander

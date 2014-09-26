@@ -24,8 +24,10 @@ object ApothecaryToolTipHandler{
         e.itemStack.getTagCompound().hasKey(ApothecaryTag.IDENTIFIER)) {
       val comp: NBTTagCompound = ApothecaryTag.getTag(e.itemStack);
       val vial: PoisonVial = e.itemStack.getItem().asInstanceOf[PoisonVial];
-      e.toolTip.add("Poison: " + vial.getPoison(e.itemStack).id());
-      e.toolTip.add("Uses Left: " + vial.getUses(e.itemStack));
+      if(vial.getPoison(e.itemStack) != null){
+        e.toolTip.add("Poison: " + vial.getPoison(e.itemStack).id());
+        e.toolTip.add("Uses Left: " + vial.getUses(e.itemStack));
+      }
     }
   }
 }
