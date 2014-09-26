@@ -15,10 +15,19 @@ extends TileEntity{
     this.uses = p.maxUses();
   }
 
+  def subUses(): Unit ={
+    this.uses -= 1;
+    if(uses <= 0){
+      this.poison = null;
+    }
+  }
+
   override def writeToNBT(comp: NBTTagCompound): Unit ={
     super.writeToNBT(comp);
-    comp.setString("poison_id", this.poison.id());
-    comp.setInteger("uses", this.uses);
+    if(this.poison == null){
+      comp.setString("poison_id", this.poison.id());
+      comp.setInteger("uses", this.uses);
+    }
   }
 
   override def readFromNBT(comp: NBTTagCompound): Unit ={

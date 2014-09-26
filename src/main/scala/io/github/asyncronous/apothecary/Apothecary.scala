@@ -6,7 +6,7 @@ import cpw.mods.fml.common.registry.GameRegistry
 import io.github.asyncronous.apothecary.block.BlockVial
 import io.github.asyncronous.apothecary.handler.{ApothecaryToolTipHandler, PoisonedBladeHandler}
 import io.github.asyncronous.apothecary.item.ItemPoisonVial
-import io.github.asyncronous.apothecary.poison.{PoisonNightshade, PoisonOleander}
+import io.github.asyncronous.apothecary.poison.{PoisonRicin, PoisonNightshade, PoisonOleander}
 import io.github.asyncronous.apothecary.proxy.CommonProxy
 import net.minecraft.item.Item
 import net.minecraftforge.common.MinecraftForge
@@ -18,6 +18,7 @@ object Apothecary{
 
   val itemOleanderPV: Item = new ItemPoisonVial(PoisonOleander);
   val itemNightshadePV: Item = new ItemPoisonVial(PoisonNightshade);
+  val itemRicinPV: Item = new ItemPoisonVial(PoisonRicin);
 
   @Mod.EventHandler
   def preInit(e: FMLPreInitializationEvent): Unit ={
@@ -31,6 +32,7 @@ object Apothecary{
     GameRegistry.registerBlock(BlockVial, "blockVial");
     GameRegistry.registerItem(itemOleanderPV, "itemOleanderPV");
     GameRegistry.registerItem(itemNightshadePV, "itemNightshadePV");
+    GameRegistry.registerItem(itemRicinPV, "itemRicinPV");
 
     Poisonables.init();
   }

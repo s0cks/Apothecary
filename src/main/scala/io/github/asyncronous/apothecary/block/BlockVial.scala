@@ -1,6 +1,6 @@
 package io.github.asyncronous.apothecary.block
 
-import io.github.asyncronous.apothecary.Poisonables
+import io.github.asyncronous.apothecary.{ApothecaryTag, Poisonables}
 import io.github.asyncronous.apothecary.item.ItemPoisonVial
 import io.github.asyncronous.apothecary.tile.TileEntityVial
 import net.minecraft.block.BlockContainer
@@ -8,6 +8,7 @@ import net.minecraft.block.material.Material
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemStack
+import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.ChatComponentText
 import net.minecraft.world.World
@@ -31,8 +32,12 @@ extends BlockContainer(Material.glass){
               tile.poison == null){
       tile.set(stack.getItem().asInstanceOf[ItemPoisonVial].poison);
       stack.stackSize -= 1;
-    } else if(Poisonables.valid(stack.getItem())){
-      //TODO: Write Poisoning logic
+    } else if(Poisonables.valid(stack.getItem()) &&
+              tile.poison != null){
+      val comp: NBTTagCompound = ApothecaryTag.getTag(stack);
+      comp.setBoolean("poisoned", true);
+      comp.setInteger("poisonId", tile.poison.uid());
+      tile.subUses();
     }
 
     return true;

@@ -14,4 +14,8 @@ with Poison{
   override def maxUses(): Int ={
     return 4;
   }
+
+  override def uid(): Int ={
+    return 22;
+  }
 }

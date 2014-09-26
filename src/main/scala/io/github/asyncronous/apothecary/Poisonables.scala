@@ -2,7 +2,7 @@ package io.github.asyncronous.apothecary
 
 import scala.collection.JavaConversions._
 import java.util
-import io.github.asyncronous.apothecary.poison.{PoisonOleander, PoisonNightshade, Poison}
+import io.github.asyncronous.apothecary.poison._
 import net.minecraft.init.Items
 import net.minecraft.item.Item
 
@@ -25,6 +25,7 @@ object Poisonables{
 
     poisons.add(PoisonNightshade);
     poisons.add(PoisonOleander);
+    poisons.add(PoisonRicin);
   }
 
   def valid(item: Item): Boolean={
