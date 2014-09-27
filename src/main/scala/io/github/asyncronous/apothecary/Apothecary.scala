@@ -8,12 +8,12 @@ import io.github.asyncronous.apothecary.handler.{ApothecaryToolTipHandler, Poiso
 import io.github.asyncronous.apothecary.item.{ItemPoison, ItemPoisonBase, ItemPoisonIngredient, ItemPoisonVial}
 import io.github.asyncronous.apothecary.poison._
 import io.github.asyncronous.apothecary.proxy.CommonProxy
-import io.github.asyncronous.apothecary.recipe.BrewingRecipe
 import net.minecraft.init.Items
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.util.DamageSource
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.config.Configuration
+import org.apache.logging.log4j.{Logger, LogManager}
 
 @Mod(modid = "APOT", name = "Apothecary", version = "0.0.0", useMetadata = true, modLanguage = "scala")
 object Apothecary{
@@ -33,6 +33,8 @@ object Apothecary{
 
   val config: Configuration = new Configuration();
 
+  val logger: Logger = LogManager.getLogger(Apothecary.getClass.getSimpleName());
+
   val dmgLow: DamageSource = new DamageSource("poison_low").setDamageBypassesArmor();
   val dmgMed: DamageSource = new DamageSource("poison_med").setDamageBypassesArmor();
   val dmgHigh: DamageSource = new DamageSource("poison_high").setDamageBypassesArmor();
@@ -41,7 +43,7 @@ object Apothecary{
   val usesMed: Int = 3;
   val usesHigh: Int = 2;
 
-  val hardcore = this.config.getBoolean("hardcore", "settings", true, "Enable this for fun :)")
+  val hardcore = this.config.getBoolean("hardcore", "settings", true, "Enable this for fun :)");
 
   @Mod.EventHandler
   def preInit(e: FMLPreInitializationEvent): Unit ={
@@ -78,6 +80,6 @@ object Apothecary{
     MinecraftForge.EVENT_BUS.register(PoisonedBladeHandler);
     MinecraftForge.EVENT_BUS.register(PoisonHandler);
 
-    BrewingRecipes.add(new BrewingRecipe(new ItemStack(itemPoisonBase), new ItemStack(Items.fermented_spider_eye), new ItemStack(Items.rotten_flesh)));
+    BrewingRecipes.init();
   }
 }

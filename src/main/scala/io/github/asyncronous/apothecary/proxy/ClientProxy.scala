@@ -2,8 +2,8 @@ package io.github.asyncronous.apothecary.proxy
 
 import cpw.mods.fml.client.registry.{ClientRegistry, RenderingRegistry}
 import cpw.mods.fml.common.registry.GameRegistry
-import io.github.asyncronous.apothecary.block.BlockVial
-import io.github.asyncronous.apothecary.render.VialRenderer
+import io.github.asyncronous.apothecary.block.{BlockBrewingPot, BlockVial}
+import io.github.asyncronous.apothecary.render.{PotRenderer, VialRenderer}
 import io.github.asyncronous.apothecary.tile.{TileEntityCrystalizer, TileEntityBrewPot, TileEntityVial}
 import net.minecraft.item.Item
 import net.minecraftforge.client.MinecraftForgeClient
@@ -23,6 +23,12 @@ extends CommonProxy{
     ClientRegistry.bindTileEntitySpecialRenderer(classOf[TileEntityVial], vialRenderer);
     RenderingRegistry.registerBlockHandler(vialRenderer);
     MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockVial), vialRenderer);
+
+    val potId = RenderingRegistry.getNextAvailableRenderId();
+    val potRenderer: PotRenderer = new PotRenderer(potId);
+    BlockBrewingPot.setRenderID(potId);
+    ClientRegistry.bindTileEntitySpecialRenderer(classOf[TileEntityBrewPot], potRenderer);
+    RenderingRegistry.registerBlockHandler(potRenderer);
   }
 
   override def registerHandlers(): Unit ={

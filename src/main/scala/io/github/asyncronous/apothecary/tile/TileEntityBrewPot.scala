@@ -8,11 +8,13 @@ import net.minecraft.tileentity.TileEntity
 class TileEntityBrewPot
 extends TileEntity{
   private var items: Array[ItemStack] = new Array[ItemStack](10);
+  private var filled: Boolean = false;
   private var ptr: Int = -1;
 
   override def writeToNBT(comp: NBTTagCompound): Unit ={
     super.writeToNBT(comp);
     comp.setInteger("ptr", this.ptr);
+    comp.setBoolean("filled", this.filled);
 
     val tags: NBTTagList = new NBTTagList();
     var count: Int = 0;
@@ -33,6 +35,7 @@ extends TileEntity{
   override def readFromNBT(comp: NBTTagCompound): Unit ={
     super.readFromNBT(comp);
     this.ptr = comp.getInteger("ptr");
+    this.filled = comp.getBoolean("filled");
     val tags: NBTTagList = comp.getTagList("Items", 10);
     this.items = new Array[ItemStack](10);
 
@@ -52,8 +55,17 @@ extends TileEntity{
   def dump(): Unit ={
     var count = 0;
     for(stack: ItemStack <- this.items){
-      Console.println((count += 1) + ": " + stack.getUnlocalizedName);
+      (count += 1)
+      Console.println(count + ": " + stack);
     }
+  }
+
+  def isFilled(): Boolean={
+    return this.filled;
+  }
+
+  def fill(): Unit ={
+    this.filled = true;
   }
 
   def full(): Boolean={
@@ -78,6 +90,7 @@ extends TileEntity{
       this.items(count) = null;
       count += 1;
     }
+    this.filled = false;
     this.ptr = -1;
   }
 
@@ -90,6 +103,10 @@ extends TileEntity{
   }
 
   def addItem(stack: ItemStack): Boolean ={
+    if(!this.isFilled()){
+      return false;
+    }
+
     this.ptr += 1;
 
     if(this.full()){

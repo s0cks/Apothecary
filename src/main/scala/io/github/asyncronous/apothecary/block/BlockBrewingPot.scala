@@ -15,20 +15,37 @@ import net.minecraft.world.World
 
 object BlockBrewingPot
 extends BlockContainer(Material.iron){
+  private var renderID: Int = 0;
+
   this.setCreativeTab(CreativeTabs.tabBrewing);
   this.setBlockName("brew_pot");
+
+  def setRenderID(id: Int): Unit ={
+    this.renderID = id;
+  }
+
+  override def getRenderType(): Int={
+    return this.renderID;
+  }
+
+  override def renderAsNormalBlock(): Boolean={
+    return false;
+  }
+
+  override def isOpaqueCube(): Boolean={
+    return false;
+  }
 
   override def onBlockActivated(world: World, x: Int, y: Int, z: Int, player: EntityPlayer, i: Int, f: Float, j: Float, k: Float): Boolean = {
     val tile: TileEntityBrewPot = world.getTileEntity(x, y, z).asInstanceOf[TileEntityBrewPot];
 
     if (player.isSneaking()) {
-      tile.clear();
+      tile.dump();
     } else {
       val stack: ItemStack = player.getCurrentEquippedItem();
       if (stack == null) {
         if (!world.isRemote) {
           player.addChatComponentMessage(new ChatComponentText("Current Ingredient Count: " + tile.getCount()));
-          tile.dump();
         }
       } else if (stack.getItem() == Items.glass_bottle) {
         if (tile.hasRecipe()) {
@@ -42,6 +59,12 @@ extends BlockContainer(Material.iron){
           if (!world.isRemote) {
             player.addChatComponentMessage(new ChatComponentText("Invalid Recipe"));
           }
+        }
+      } else if(stack.getItem() == Items.water_bucket){
+        if(!tile.isFilled()){
+          tile.fill();
+          stack.stackSize -= 1;
+          player.inventory.addItemStackToInventory(new ItemStack(Items.bucket));
         }
       }
     }
@@ -67,7 +90,7 @@ extends BlockContainer(Material.iron){
   }
 
   override def getSelectedBoundingBoxFromPool(world: World, x: Int, y: Int, z: Int): AxisAlignedBB={
-    return AxisAlignedBB.getBoundingBox(x + 0.3, y + 0.3, z + 0.3, x + 0.7, y + 0.7, z + 0.7);
+    return AxisAlignedBB.getBoundingBox(x + 0.3, y, z + 0.3, x + 0.7, y + 0.4, z + 0.7);
   }
 
   override def createNewTileEntity(world: World, id: Int): TileEntity={
