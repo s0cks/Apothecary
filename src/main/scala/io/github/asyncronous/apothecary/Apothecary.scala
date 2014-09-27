@@ -5,7 +5,7 @@ import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.common.{Mod, SidedProxy}
 import io.github.asyncronous.apothecary.block.{BlockBrewingPot, BlockCrystalizer, BlockVial}
 import io.github.asyncronous.apothecary.handler.{ApothecaryToolTipHandler, PoisonHandler, PoisonedBladeHandler}
-import io.github.asyncronous.apothecary.item.{ItemPoison, ItemPoisonBase, ItemPoisonIngredient, ItemPoisonVial}
+import io.github.asyncronous.apothecary.item._
 import io.github.asyncronous.apothecary.poison._
 import io.github.asyncronous.apothecary.proxy.CommonProxy
 import net.minecraft.init.Items
@@ -30,6 +30,7 @@ object Apothecary{
   val itemHemlockPV: Item = new ItemPoison(PoisonHemlock);
   val itemPoisonBase: Item = new ItemPoisonBase();
   val itemIngredient: Item = new ItemPoisonIngredient();
+  val itemDebug: Item = new ItemDebug();
 
   val config: Configuration = new Configuration();
 
@@ -66,6 +67,7 @@ object Apothecary{
     GameRegistry.registerItem(itemHemlockPV, "itemHemlockPV");
     GameRegistry.registerItem(itemPoisonBase, "itemPoisonBase");
     GameRegistry.registerItem(itemIngredient, "itemIngredient");
+    GameRegistry.registerItem(itemDebug, "itemDebug");
 
     Poisonables.init();
 

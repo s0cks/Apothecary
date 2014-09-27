@@ -1,13 +1,14 @@
 package io.github.asyncronous.apothecary.block
 
+import io.github.asyncronous.apothecary.Apothecary
 import io.github.asyncronous.apothecary.tile.TileEntityBrewPot
-import net.minecraft.block.BlockContainer
+import net.minecraft.block.{Block, BlockContainer}
 import net.minecraft.block.material.Material
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
-import net.minecraft.init.Items
+import net.minecraft.init.{Blocks, Items}
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
 import net.minecraft.util.{AxisAlignedBB, ChatComponentText}
@@ -34,6 +35,17 @@ extends BlockContainer(Material.iron){
 
   override def isOpaqueCube(): Boolean={
     return false;
+  }
+
+  override def onNeighborBlockChange(world: World, x: Int, y: Int, z: Int, block: Block): Unit ={
+    val b: Block = world.getBlock(x, y - 1, z);
+    val tile: TileEntityBrewPot = world.getTileEntity(x, y, z).asInstanceOf[TileEntityBrewPot];
+
+    if(b != Blocks.fire){
+      tile.cooled();
+    } else{
+      tile.heated();
+    }
   }
 
   override def onBlockActivated(world: World, x: Int, y: Int, z: Int, player: EntityPlayer, i: Int, f: Float, j: Float, k: Float): Boolean = {
@@ -65,6 +77,13 @@ extends BlockContainer(Material.iron){
           tile.fill();
           stack.stackSize -= 1;
           player.inventory.addItemStackToInventory(new ItemStack(Items.bucket));
+        }
+      } else if(stack.getItem() == Apothecary.itemDebug){
+        if(!world.isRemote){
+          player.addChatComponentMessage(new ChatComponentText("Current Ingredient Count: " + tile.getCount()));
+          player.addChatComponentMessage(new ChatComponentText("Valid Recipe: " + tile.hasRecipe()));
+          player.addChatComponentMessage(new ChatComponentText("Heated: " + tile.isHeated()));
+          player.addChatComponentMessage(new ChatComponentText("Water: " + tile.isFilled()));
         }
       }
     }

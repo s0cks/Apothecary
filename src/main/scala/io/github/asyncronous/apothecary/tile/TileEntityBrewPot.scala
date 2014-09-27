@@ -9,12 +9,14 @@ class TileEntityBrewPot
 extends TileEntity{
   private var items: Array[ItemStack] = new Array[ItemStack](10);
   private var filled: Boolean = false;
+  private var heatSource: Boolean = false;
   private var ptr: Int = -1;
 
   override def writeToNBT(comp: NBTTagCompound): Unit ={
     super.writeToNBT(comp);
     comp.setInteger("ptr", this.ptr);
     comp.setBoolean("filled", this.filled);
+    comp.setBoolean("heatSource", this.heatSource);
 
     val tags: NBTTagList = new NBTTagList();
     var count: Int = 0;
@@ -36,6 +38,7 @@ extends TileEntity{
     super.readFromNBT(comp);
     this.ptr = comp.getInteger("ptr");
     this.filled = comp.getBoolean("filled");
+    this.heatSource = comp.getBoolean("heatSource");
     val tags: NBTTagList = comp.getTagList("Items", 10);
     this.items = new Array[ItemStack](10);
 
@@ -52,16 +55,28 @@ extends TileEntity{
     }
   }
 
+  def heated(): Unit ={
+    this.heatSource = true;
+  }
+
+  def cooled(): Unit ={
+    this.heatSource = false;
+  }
+
   def dump(): Unit ={
     var count = 0;
     for(stack: ItemStack <- this.items){
-      (count += 1)
+      count += 1
       Console.println(count + ": " + stack);
     }
   }
 
   def isFilled(): Boolean={
     return this.filled;
+  }
+
+  def isHeated(): Boolean={
+    return this.heatSource;
   }
 
   def fill(): Unit ={

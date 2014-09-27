@@ -1,6 +1,7 @@
 package io.github.asyncronous.apothecary;
 
 import net.minecraft.potion.Potion;
+import scala.Console;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -9,10 +10,14 @@ public final class Potions{
     public static void extendArray()
     throws Exception{
         Potion[] potions;
-        Field f;
-        f = Potion.class.getDeclaredField("potionTypes");
-        if(f == null){
-            f = Potion.class.getDeclaredField("field_764245_a");
+        Field f = null;
+        for(Field field : Potion.class.getDeclaredFields()){
+            Console.println(field.getName());
+            if(field.getName().equalsIgnoreCase("potionTypes") ||
+               field.getName().equalsIgnoreCase("field_76425_a")){
+
+                f = field;
+            }
         }
         if(f == null){
             throw new RuntimeException("Cannot find Potion#potionTypes field");
