@@ -1,10 +1,25 @@
 # Items
 item.poison.ricin.name=Ricin Poison
-item.poison.oleander.name=Oleander Poison
-item.poison.nightshade.name=Nightshade Poison
+item.poison.nerium.name=Nerium Poison
+item.poison.cyanide.name=Cyanide Poison
+item.poison.hemlock.name=Hemlock Poison
+item.poison.belladonna.name=Belladonna Poison
+item.poison.aconite.name=Aconite Poison
+item.poison_base.name=Poison Base
+item.ingredient.oleander_leaf.name=Oleander Leaf
+item.ingredient.belladonna_berries.name=Belladonna Berries
+item.ingredient.apple_seeds.name=Apple Seeds
+item.ingredient.monkshood_leaf.name=Monkshood Leaf
+item.ingredient.hemlock_leaf.name=Hemlock Leaf
+item.ingredient.castor_beans.name=Castor Beans
 
 # Blocks
+tile.brew_pot.name=Brew Pot
+tile.crystalizer.name=Crystalizer
 tile.vial.name=Vial
 tile.vial.ricin.name=Vial of Ricin
-tile.vial.nightshade.name=Vial of Nightshade
-tile.vial.oleander.name=Vial of Oleander
+tile.vial.nerium.name=Vial of Oleander
+tile.vial.cyanide.name=Vial of Cyanide
+tile.vial.hemlock.name=Vial of Hemlock
+tile.vial.belladonna.name=Vial of Belladonna
+tile.vial.aconite.name=Vial of Aconite

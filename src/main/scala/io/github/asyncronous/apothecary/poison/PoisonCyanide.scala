@@ -5,11 +5,11 @@ import io.github.asyncronous.apothecary.anot.High
 import net.minecraft.potion.Potion
 
 @High
-object PoisonRicin
+object PoisonCyanide
 extends Potion(Poisonables.nextAvailableID(), true, 0)
 with Poison{
-  override def id(): String={
-    return "ricin";
+  override def id(): String ={
+    return "cyanide";
   }
 
   override def maxUses(): Int ={
@@ -17,6 +17,6 @@ with Poison{
   }
 
   override def uid(): Int ={
-    return 23;
+    return 24;
   }
 }

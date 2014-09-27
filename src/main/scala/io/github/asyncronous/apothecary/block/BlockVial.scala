@@ -59,9 +59,11 @@ extends BlockContainer(Material.glass){
     } else if(Poisonables.valid(stack.getItem()) &&
               tile.poison != null){
       val comp: NBTTagCompound = ApothecaryTag.getTag(stack);
-      comp.setBoolean("poisoned", true);
-      comp.setInteger("poisonId", tile.poison.uid());
-      tile.subUses();
+      if(!comp.getBoolean("poisoned")){
+        comp.setBoolean("poisoned", true);
+        comp.setInteger("poisonId", tile.poison.uid());
+        tile.subUses();
+      }
     }
 
     return true;

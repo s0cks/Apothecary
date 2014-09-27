@@ -31,6 +31,11 @@ dependencies {
 
 }
 
+sourceSets{
+    sourceSets.main.scala.srcDir "src/main/scala"
+    sourceSets.main.java.srcDirs = []
+}
+
 processResources{
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
