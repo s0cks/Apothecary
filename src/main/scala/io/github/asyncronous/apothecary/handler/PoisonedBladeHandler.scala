@@ -12,7 +12,7 @@ object PoisonedBladeHandler{
   @SubscribeEvent
   def onPlayerAttack(e: AttackEntityEvent): Unit ={
     val stack: ItemStack = e.entityPlayer.getCurrentEquippedItem();
-    if(stack.hasTagCompound() && stack.getTagCompound().hasKey(ApothecaryTag.IDENTIFIER)){
+    if(stack != null && stack.hasTagCompound() && stack.getTagCompound().hasKey(ApothecaryTag.IDENTIFIER)){
       val comp: NBTTagCompound = ApothecaryTag.getTag(stack);
       if(comp.getBoolean("poisoned")){
         if(e.target.isInstanceOf[EntityLiving]){
