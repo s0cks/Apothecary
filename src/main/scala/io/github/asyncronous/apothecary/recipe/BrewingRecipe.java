@@ -25,16 +25,10 @@ public class BrewingRecipe{
             return false;
         }
 
-        for(int i = 0; i < MAX_SIZE; i++){
-            if(args[i] == null && this.ingrediants[i] != null ||
-               this.ingrediants[i] == null && args[i] != null){
-               ret = false;
-            }
-
-            if(ItemStack.areItemStacksEqual(args[i], this.ingrediants[i])){
-                ret = true;
-            }
+        for(int i = 0; i < this.size; i++){
+            ret = ItemStack.areItemStacksEqual(args[i], this.ingrediants[i]);
         }
+
         return ret;
     }
 

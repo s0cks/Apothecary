@@ -15,35 +15,42 @@ object BrewingRecipes{
 
   def init(): Unit ={
     add(new BrewingRecipe(new ItemStack(Apothecary.itemPoisonBase),
+      new ItemStack(Items.nether_wart),
       new ItemStack(Items.fermented_spider_eye),
       new ItemStack(Items.rotten_flesh)
     ));
     add(new BrewingRecipe(new ItemStack(Apothecary.itemCyanidePV),
+      new ItemStack(Items.nether_wart),
       new ItemStack(Items.fermented_spider_eye),
       new ItemStack(Items.rotten_flesh),
       new ItemStack(Apothecary.itemIngredient, 1, IngredientMeta.APPLE_SEEDS)
     ));
     add(new BrewingRecipe(new ItemStack(Apothecary.itemHemlockPV),
+      new ItemStack(Items.nether_wart),
       new ItemStack(Items.fermented_spider_eye),
       new ItemStack(Items.rotten_flesh),
       new ItemStack(Apothecary.itemIngredient, 1, IngredientMeta.HEMLOCK_LEAF)
     ));
     add(new BrewingRecipe(new ItemStack(Apothecary.itemBelladonnaPV),
+      new ItemStack(Items.nether_wart),
       new ItemStack(Items.fermented_spider_eye),
       new ItemStack(Items.rotten_flesh),
       new ItemStack(Apothecary.itemIngredient, 1, IngredientMeta.BELLADONNA_BERRIES)
     ));
     add(new BrewingRecipe(new ItemStack(Apothecary.itemNeriumPV),
+      new ItemStack(Items.nether_wart),
       new ItemStack(Items.fermented_spider_eye),
       new ItemStack(Items.rotten_flesh),
       new ItemStack(Apothecary.itemIngredient, 1, IngredientMeta.OLEANDER_LEAF)
     ));
     add(new BrewingRecipe(new ItemStack(Apothecary.itemRicinPV),
+      new ItemStack(Items.nether_wart),
       new ItemStack(Items.fermented_spider_eye),
       new ItemStack(Items.rotten_flesh),
       new ItemStack(Apothecary.itemIngredient, 1, IngredientMeta.CASTOR_BEANS)
     ));
     add(new BrewingRecipe(new ItemStack(Apothecary.itemAconitePV),
+      new ItemStack(Items.nether_wart),
       new ItemStack(Items.fermented_spider_eye),
       new ItemStack(Items.rotten_flesh),
       new ItemStack(Apothecary.itemIngredient, 1, IngredientMeta.MONKSHOOD_LEAF)

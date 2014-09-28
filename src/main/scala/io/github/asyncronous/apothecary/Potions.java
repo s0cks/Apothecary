@@ -17,6 +17,7 @@ public final class Potions{
                field.getName().equalsIgnoreCase("field_76425_a")){
 
                 f = field;
+                break;
             }
         }
         if(f == null){

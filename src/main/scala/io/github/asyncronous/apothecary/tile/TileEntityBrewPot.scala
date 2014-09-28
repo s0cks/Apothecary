@@ -39,6 +39,7 @@ extends TileEntity{
     this.ptr = comp.getInteger("ptr");
     this.filled = comp.getBoolean("filled");
     this.heatSource = comp.getBoolean("heatSource");
+
     val tags: NBTTagList = comp.getTagList("Items", 10);
     this.items = new Array[ItemStack](10);
 
@@ -118,7 +119,7 @@ extends TileEntity{
   }
 
   def addItem(stack: ItemStack): Boolean ={
-    if(!this.isFilled()){
+    if(!this.isFilled() || !this.isHeated()){
       return false;
     }
 

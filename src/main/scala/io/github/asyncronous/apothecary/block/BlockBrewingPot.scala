@@ -2,12 +2,12 @@ package io.github.asyncronous.apothecary.block
 
 import io.github.asyncronous.apothecary.Apothecary
 import io.github.asyncronous.apothecary.tile.TileEntityBrewPot
-import net.minecraft.block.{Block, BlockContainer}
 import net.minecraft.block.material.Material
+import net.minecraft.block.{Block, BlockContainer}
 import net.minecraft.creativetab.CreativeTabs
-import net.minecraft.entity.Entity
 import net.minecraft.entity.item.EntityItem
 import net.minecraft.entity.player.EntityPlayer
+import net.minecraft.entity.{Entity, EntityLivingBase}
 import net.minecraft.init.{Blocks, Items}
 import net.minecraft.item.ItemStack
 import net.minecraft.tileentity.TileEntity
@@ -20,6 +20,8 @@ extends BlockContainer(Material.iron){
 
   this.setCreativeTab(CreativeTabs.tabBrewing);
   this.setBlockName("brew_pot");
+  this.setHardness(2.0F);
+  this.setResistance(10.0F);
 
   def setRenderID(id: Int): Unit ={
     this.renderID = id;
@@ -62,8 +64,7 @@ extends BlockContainer(Material.iron){
       } else if (stack.getItem() == Items.glass_bottle) {
         if (tile.hasRecipe()) {
           val output: ItemStack = tile.getOutput();
-          Console.println(output);
-          if(player.inventory.addItemStackToInventory(output)){
+          if(player.inventory.addItemStackToInventory(output.copy())){
             stack.stackSize -= 1;
             tile.clear();
           }
@@ -91,6 +92,14 @@ extends BlockContainer(Material.iron){
     return true;
   }
 
+  override def onBlockPlacedBy(world: World, x: Int, y: Int, z: Int, living: EntityLivingBase, stack: ItemStack): Unit = {
+    val tile: TileEntityBrewPot = world.getTileEntity(x, y, z).asInstanceOf[TileEntityBrewPot];
+
+    if(world.getBlock(x, y - 1, z) == Blocks.fire){
+      tile.heated();
+    }
+  }
+
   override def onEntityCollidedWithBlock(world: World, x: Int, y: Int, z: Int, e: Entity): Unit ={
     val tile: TileEntityBrewPot = world.getTileEntity(x, y, z).asInstanceOf[TileEntityBrewPot];
 
@@ -100,6 +109,7 @@ extends BlockContainer(Material.iron){
 
       if(tile.addItem(stack)){
         item.setDead();
+        world.markBlockForUpdate(x, y, z);
       }
     }
   }
