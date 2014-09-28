@@ -32,12 +32,6 @@ with ISimpleBlockRenderingHandler{
 
     if(tile.isFilled()){
       GL11.glPushMatrix();
-      /*
-      GL11.glEnable(GL11.GL_BLEND);
-      GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-      GL11.glDisable(GL11.GL_ALPHA_TEST);
-      */
-
       GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
       GL11.glTranslatef(0.25F, 0.9F, 0.25F);
       GL11.glTranslatef(0.0F, 0.43F - 1.0F, w - 0.5F);
@@ -47,12 +41,6 @@ with ISimpleBlockRenderingHandler{
       this.bindTexture(TextureMap.locationBlocksTexture);
       this.renderIcon(0, 0, this.water, 16, 16, 240);
 
-      Console.println("Rendering Water");
-
-      /*
-      GL11.glEnable(GL11.GL_ALPHA_TEST);
-      GL11.glDisable(GL11.GL_BLEND);
-      */
       GL11.glPopMatrix();
     }
 

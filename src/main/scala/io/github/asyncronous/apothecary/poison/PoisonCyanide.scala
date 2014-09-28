@@ -17,6 +17,6 @@ with Poison{
   }
 
   override def uid(): Int ={
-    return 24;
+    return this.getId();
   }
 }

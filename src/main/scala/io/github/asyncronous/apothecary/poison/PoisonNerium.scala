@@ -11,7 +11,7 @@ with Poison{
   this.setPotionName("poison.neriumPoison");
 
   override def uid(): Int={
-    return 21;
+    return this.getId();
   }
 
   override def id(): String ={
