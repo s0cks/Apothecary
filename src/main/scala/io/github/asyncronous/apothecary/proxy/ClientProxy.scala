@@ -3,10 +3,12 @@ package io.github.asyncronous.apothecary.proxy
 import cpw.mods.fml.client.registry.{ClientRegistry, RenderingRegistry}
 import cpw.mods.fml.common.registry.GameRegistry
 import io.github.asyncronous.apothecary.block.{BlockBrewingPot, BlockVial}
+import io.github.asyncronous.apothecary.handler.{PoisonHandler, PoisonedBladeHandler, ApothecaryToolTipHandler}
 import io.github.asyncronous.apothecary.render.{PotRenderer, VialRenderer}
 import io.github.asyncronous.apothecary.tile.{TileEntityCrystalizer, TileEntityBrewPot, TileEntityVial}
 import net.minecraft.item.Item
 import net.minecraftforge.client.MinecraftForgeClient
+import net.minecraftforge.common.MinecraftForge
 
 class ClientProxy
 extends CommonProxy{
@@ -32,6 +34,8 @@ extends CommonProxy{
   }
 
   override def registerHandlers(): Unit ={
-
+    MinecraftForge.EVENT_BUS.register(ApothecaryToolTipHandler);
+    MinecraftForge.EVENT_BUS.register(PoisonedBladeHandler);
+    MinecraftForge.EVENT_BUS.register(PoisonHandler);
   }
 }
