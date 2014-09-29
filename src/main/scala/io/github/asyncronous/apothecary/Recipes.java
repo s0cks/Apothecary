@@ -16,7 +16,6 @@ public final class Recipes{
             res = recipe.getRecipeOutput();
             if(ItemStack.areItemStacksEqual(res, out)){
                 list.remove(i);
-                System.out.println("Removed Recipe For: " + out);
                 break;
             }
         }

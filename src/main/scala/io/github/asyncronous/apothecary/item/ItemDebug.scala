@@ -6,4 +6,5 @@ import net.minecraft.item.Item
 class ItemDebug
 extends Item{
   this.setCreativeTab(CreativeTabs.tabBrewing);
+  this.setUnlocalizedName("debug");
 }

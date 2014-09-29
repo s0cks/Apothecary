@@ -3,7 +3,7 @@ package io.github.asyncronous.apothecary
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.common.{Mod, SidedProxy}
-import io.github.asyncronous.apothecary.block.{BlockBrewingPot, BlockCrystalizer, BlockVial}
+import io.github.asyncronous.apothecary.block.{BlockBrewingPot, BlockVial}
 import io.github.asyncronous.apothecary.handler.{ApothecaryToolTipHandler, PoisonHandler, PoisonedBladeHandler}
 import io.github.asyncronous.apothecary.item._
 import io.github.asyncronous.apothecary.poison._
@@ -52,7 +52,6 @@ object Apothecary{
   @Mod.EventHandler
   def init(e: FMLInitializationEvent): Unit ={
     GameRegistry.registerBlock(BlockVial, classOf[ItemPoisonVial], "blockVial");
-    GameRegistry.registerBlock(BlockCrystalizer, "blockCrystalizer");
     GameRegistry.registerBlock(BlockBrewingPot, "blockBrewPot");
 
     GameRegistry.registerItem(itemNeriumPV, "itemOleanderPV");

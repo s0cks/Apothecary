@@ -26,6 +26,8 @@ extends BlockContainer(Material.glass){
   this.setCreativeTab(CreativeTabs.tabBrewing);
   this.setBlockBounds(0.4F, 0.0F, 0.4F, 0.6F, 0.5F, 0.6F);
   this.setBlockName("vial");
+  this.setHardness(2.0F);
+  this.setResistance(10.0F);
 
   override def onBlockPlacedBy(world: World, x: Int, y: Int, z: Int, living: EntityLivingBase, stack: ItemStack): Unit ={
     val tile: TileEntityVial = world.getTileEntity(x, y, z).asInstanceOf[TileEntityVial];

@@ -12,14 +12,15 @@ item.ingredient.apple_seeds.name=Apple Seeds
 item.ingredient.monkshood_leaf.name=Monkshood Leaf
 item.ingredient.hemlock_leaf.name=Hemlock Leaf
 item.ingredient.castor_beans.name=Castor Beans
+item.debug.name=Debug Item
 
 # Blocks
 tile.brew_pot.name=Brew Pot
 tile.crystalizer.name=Crystalizer
 tile.vial.name=Vial
-tile.vial.ricin.name=Vial of Ricin
-tile.vial.nerium.name=Vial of Oleander
-tile.vial.cyanide.name=Vial of Cyanide
-tile.vial.hemlock.name=Vial of Hemlock
-tile.vial.belladonna.name=Vial of Belladonna
-tile.vial.aconite.name=Vial of Aconite
+tile.vial.ricin.name=Vial of Ricin Poison
+tile.vial.nerium.name=Vial of Oleander Poison
+tile.vial.cyanide.name=Vial of Cyanide Poison
+tile.vial.hemlock.name=Vial of Hemlock Poison
+tile.vial.belladonna.name=Vial of Belladonna Poison
+tile.vial.aconite.name=Vial of Aconite Poison
