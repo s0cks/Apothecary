@@ -1,4 +1,4 @@
-package io.github.asyncronous.apothecary.poison
+package io.github.asyncronous.apothecary.api
 
 trait Poison{
   def id(): String;

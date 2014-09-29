@@ -1,6 +1,6 @@
 package io.github.asyncronous.apothecary
 
-import io.github.asyncronous.apothecary.poison.Poison
+import io.github.asyncronous.apothecary.api.Poison
 import net.minecraft.item.ItemStack
 
 trait PoisonVial{

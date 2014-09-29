@@ -3,9 +3,10 @@ package io.github.asyncronous.apothecary.block
 import java.util.Random
 
 import cpw.mods.fml.relauncher.{Side, SideOnly}
+import io.github.asyncronous.apothecary.api.Poisonables
 import io.github.asyncronous.apothecary.item.ItemPoison
 import io.github.asyncronous.apothecary.tile.TileEntityVial
-import io.github.asyncronous.apothecary.{ApothecaryTag, PoisonVial, Poisonables}
+import io.github.asyncronous.apothecary.{PoisonVial, ApothecaryTag}
 import net.minecraft.block.BlockContainer
 import net.minecraft.block.material.Material
 import net.minecraft.creativetab.CreativeTabs

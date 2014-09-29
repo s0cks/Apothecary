@@ -22,7 +22,6 @@ object ApothecaryToolTipHandler{
     if (e.itemStack.hasTagCompound &&
         e.itemStack.getItem().isInstanceOf[PoisonVial] &&
         e.itemStack.getTagCompound().hasKey(ApothecaryTag.IDENTIFIER)) {
-      val comp: NBTTagCompound = ApothecaryTag.getTag(e.itemStack);
       val vial: PoisonVial = e.itemStack.getItem().asInstanceOf[PoisonVial];
       if(vial.getPoison(e.itemStack) != null){
         e.toolTip.add("Poison: " + vial.getPoison(e.itemStack).id());

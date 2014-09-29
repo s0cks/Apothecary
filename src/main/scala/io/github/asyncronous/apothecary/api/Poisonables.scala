@@ -1,10 +1,9 @@
-package io.github.asyncronous.apothecary
+package io.github.asyncronous.apothecary.api
 
 import java.util
 
-import io.github.asyncronous.apothecary.poison._
+import io.github.asyncronous.apothecary.Apothecary
 import net.minecraft.entity.Entity
-import net.minecraft.init.Items
 import net.minecraft.item.Item
 
 import scala.collection.JavaConversions._
@@ -12,8 +11,11 @@ import scala.collection.JavaConversions._
 object Poisonables{
   private val items: util.List[Item] = new util.LinkedList[Item]();
   private val poisons: util.List[Poison] = new util.LinkedList[Poison]();
-
   private var potion_id = 30;
+
+  val usesLow: Int = 4;
+  val usesMed: Int = 3;
+  val usesHigh: Int = 2;
 
   def nextAvailableID(): Int={
     val id = potion_id;
@@ -21,22 +23,12 @@ object Poisonables{
     return id;
   }
 
-  def init(): Unit ={
-    items.add(Items.wooden_sword);
-    items.add(Items.stone_sword);
-    items.add(Items.iron_sword);
-    items.add(Items.golden_sword);
-    items.add(Items.diamond_sword);
+  def addPoisonable(i: Item): Unit ={
+    this.items.add(i);
+  }
 
-    items.add(Items.wooden_axe);
-    items.add(Items.stone_axe);
-    items.add(Items.iron_axe);
-    items.add(Items.golden_axe);
-    items.add(Items.diamond_axe);
-
-    poisons.add(PoisonNerium);
-    poisons.add(PoisonRicin);
-    poisons.add(PoisonCyanide);
+  def addPoison(p: Poison): Unit ={
+    this.poisons.add(p);
   }
 
   def valid(item: Item): Boolean={

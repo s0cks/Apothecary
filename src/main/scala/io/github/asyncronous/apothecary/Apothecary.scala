@@ -13,7 +13,7 @@ import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.util.DamageSource
 import net.minecraftforge.common.MinecraftForge
 import net.minecraftforge.common.config.Configuration
-import org.apache.logging.log4j.{Logger, LogManager}
+import org.apache.logging.log4j.{LogManager, Logger}
 
 @Mod(modid = "APOT", name = "Apothecary", version = "0.0.0", useMetadata = true, modLanguage = "scala")
 object Apothecary{
@@ -40,10 +40,6 @@ object Apothecary{
   val dmgMed: DamageSource = new DamageSource("poison_med").setDamageBypassesArmor();
   val dmgHigh: DamageSource = new DamageSource("poison_high").setDamageBypassesArmor();
 
-  val usesLow: Int = 4;
-  val usesMed: Int = 3;
-  val usesHigh: Int = 2;
-
   val hardcore = this.config.getBoolean("hardcore", "settings", true, "Enable this for fun :)");
 
   @Mod.EventHandler
@@ -69,7 +65,7 @@ object Apothecary{
     GameRegistry.registerItem(itemIngredient, "itemIngredient");
     GameRegistry.registerItem(itemDebug, "itemDebug");
 
-    Poisonables.init();
+    ApothecaryPoisonables.init();
 
     proxy.registerHandlers();
     proxy.registerRenders();
@@ -82,6 +78,6 @@ object Apothecary{
     MinecraftForge.EVENT_BUS.register(PoisonedBladeHandler);
     MinecraftForge.EVENT_BUS.register(PoisonHandler);
 
-    BrewingRecipes.init();
+    ApothecaryRecipes.init();
   }
 }

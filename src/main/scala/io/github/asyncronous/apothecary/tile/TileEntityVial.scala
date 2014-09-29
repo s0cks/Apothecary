@@ -1,7 +1,6 @@
 package io.github.asyncronous.apothecary.tile
 
-import io.github.asyncronous.apothecary.Poisonables
-import io.github.asyncronous.apothecary.poison.Poison
+import io.github.asyncronous.apothecary.api.{Poison, Poisonables}
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
 

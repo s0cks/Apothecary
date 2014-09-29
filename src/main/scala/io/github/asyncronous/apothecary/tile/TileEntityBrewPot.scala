@@ -1,6 +1,6 @@
 package io.github.asyncronous.apothecary.tile
 
-import io.github.asyncronous.apothecary.BrewingRecipes
+import io.github.asyncronous.apothecary.api.BrewingRecipes
 import net.minecraft.item.ItemStack
 import net.minecraft.nbt.{NBTTagList, NBTTagCompound}
 import net.minecraft.tileentity.TileEntity

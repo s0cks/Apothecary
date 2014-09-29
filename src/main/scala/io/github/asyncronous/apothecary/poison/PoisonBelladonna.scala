@@ -1,22 +1,12 @@
 package io.github.asyncronous.apothecary.poison
 
-import io.github.asyncronous.apothecary.{Apothecary, Poisonables}
 import io.github.asyncronous.apothecary.anot.Medium
-import net.minecraft.potion.Potion
+import io.github.asyncronous.apothecary.api.{AbstractPoison, Poisonables}
 
 @Medium
 object PoisonBelladonna
-extends Potion(Poisonables.nextAvailableID(), true, 0)
-with Poison{
-  override def id(): String ={
-    return "belladonna";
-  }
-
+extends AbstractPoison("belladonna"){
   override def maxUses(): Int ={
-    return Apothecary.usesMed;
-  }
-
-  override def uid(): Int={
-    return this.getId();
+    return Poisonables.usesMed;
   }
 }

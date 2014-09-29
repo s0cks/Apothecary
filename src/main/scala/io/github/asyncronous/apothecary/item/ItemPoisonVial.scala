@@ -1,7 +1,7 @@
 package io.github.asyncronous.apothecary.item
 
-import io.github.asyncronous.apothecary.poison.Poison
-import io.github.asyncronous.apothecary.{ApothecaryTag, PoisonVial, Poisonables}
+import io.github.asyncronous.apothecary.api.{Poison, Poisonables}
+import io.github.asyncronous.apothecary.{PoisonVial, ApothecaryTag}
 import net.minecraft.block.Block
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.{ItemBlock, ItemStack}

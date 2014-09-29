@@ -1,6 +1,6 @@
 package io.github.asyncronous.apothecary.item
 
-import io.github.asyncronous.apothecary.poison.Poison
+import io.github.asyncronous.apothecary.api.Poison
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.Item
 

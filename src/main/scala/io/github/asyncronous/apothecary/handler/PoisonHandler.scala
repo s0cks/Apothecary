@@ -1,7 +1,7 @@
 package io.github.asyncronous.apothecary.handler
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
-import io.github.asyncronous.apothecary.Poisonables
+import io.github.asyncronous.apothecary.api.Poisonables
 import io.github.asyncronous.apothecary.poison.{PoisonCyanide, PoisonNerium, PoisonRicin}
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent
 

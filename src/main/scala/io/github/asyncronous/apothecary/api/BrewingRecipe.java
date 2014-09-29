@@ -1,9 +1,10 @@
-package io.github.asyncronous.apothecary.recipe;
+package io.github.asyncronous.apothecary.api;
 
 import net.minecraft.item.ItemStack;
 
-public class BrewingRecipe{
+public final class BrewingRecipe{
     public static final int MAX_SIZE = 10;
+
     public final ItemStack[] ingrediants = new ItemStack[MAX_SIZE];
     public final int size;
     public final ItemStack output;
