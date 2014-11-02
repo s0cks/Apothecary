@@ -2,10 +2,14 @@ package io.github.asyncronous.apothecary.api;
 
 import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public final class BrewingRecipe{
     public static final int MAX_SIZE = 10;
 
-    public final ItemStack[] ingrediants = new ItemStack[MAX_SIZE];
+    public final List<ItemStack> ingrediants;
     public final int size;
     public final ItemStack output;
 
@@ -16,30 +20,30 @@ public final class BrewingRecipe{
 
         this.output = output;
         this.size = args.length;
-        System.arraycopy(args, 0, this.ingrediants, 0, args.length);
+        this.ingrediants = Arrays.asList(args);
     }
 
     public boolean equal(ItemStack[] args){
-        boolean ret = false;
+        List<ItemStack> list = new ArrayList<ItemStack>(this.ingrediants);
 
-        if(this.calcSize(args) != this.size){
-            return false;
-        }
+        for(ItemStack stack : args){
+            if(stack != null){
+                boolean ret = false;
 
-        for(int i = 0; i < this.size; i++){
-            ret = ItemStack.areItemStacksEqual(args[i], this.ingrediants[i]);
-        }
+                for(ItemStack s : list){
+                    if(s.getItem() == stack.getItem() && s.getItemDamage() == stack.getItemDamage() && s.stackSize == stack.stackSize){
+                        ret = true;
+                        list.remove(s);
+                        break;
+                    }
+                }
 
-        return ret;
-    }
-
-    private int calcSize(ItemStack[] stack){
-        int count = 0;
-        for(ItemStack aStack : stack){
-            if(aStack != null){
-                count++;
+                if(!ret){
+                    return false;
+                }
             }
         }
-        return count;
+
+        return list.isEmpty();
     }
 }

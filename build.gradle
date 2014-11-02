@@ -18,7 +18,7 @@ buildscript {
 apply plugin: 'scala'
 apply plugin: 'forge'
 
-version = "0.0.0"
+version = "0.9.1"
 group= "io.github.asyncronous" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "apothecary"
 
@@ -27,13 +27,10 @@ minecraft {
     assetDir = "eclipse/assets"
 }
 
-dependencies {
-
-}
-
 sourceSets{
-    sourceSets.main.scala.srcDir "src/main/scala"
-    sourceSets.main.java.srcDirs = []
+    sourceSets.main.scala.srcDirs = [
+            "src/main/scala",
+    ]
 }
 
 processResources{
@@ -44,7 +41,18 @@ processResources{
         include 'mcmod.info'
         expand 'version':project.version, 'mcversion':project.minecraft.version
     }
+
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+task deobfJar(type: Jar){
+    from(sourceSets.main.output){
+        appendix = "deobf"
+    }
+}
+
+artifacts{
+    archives deobfJar
 }

@@ -2,7 +2,6 @@ package io.github.asyncronous.apothecary.api
 
 import java.util
 
-import io.github.asyncronous.apothecary.Apothecary
 import net.minecraft.entity.Entity
 import net.minecraft.item.Item
 
@@ -46,14 +45,14 @@ object Poisonables{
   }
 
   def attackHigh(e: Entity): Unit ={
-    e.attackEntityFrom(Apothecary.dmgHigh, 10.0F);
+    e.attackEntityFrom(ApothecaryAPI.dmgHigh, 10.0F);
   }
 
   def attackMed(e: Entity): Unit ={
-    e.attackEntityFrom(Apothecary.dmgMed, 8.0F);
+    e.attackEntityFrom(ApothecaryAPI.dmgMed, 8.0F);
   }
 
   def attackLow(e: Entity): Unit ={
-    e.attackEntityFrom(Apothecary.dmgLow, 2.0F);
+    e.attackEntityFrom(ApothecaryAPI.dmgLow, 2.0F);
   }
 }
