@@ -56,7 +56,6 @@ extends BlockContainer(Material.iron){
 
       if (player.isSneaking() && player.getCurrentEquippedItem == null) {
         tile.clear();
-        world.markBlockForUpdate(x, y, z);
       } else {
         val stack: ItemStack = player.getCurrentEquippedItem();
         if (stack == null) {
@@ -64,22 +63,18 @@ extends BlockContainer(Material.iron){
             tile.debug();
           }
         } else if (stack.getItem() == Items.glass_bottle) {
-          if(!world.isRemote){
-            if (tile.hasRecipe()) {
-              val output: ItemStack = tile.getOutput();
+          if (tile.hasRecipe()) {
+            val output: ItemStack = tile.getOutput();
 
-              if(player.inventory.addItemStackToInventory(output.copy())){
+            if(player.inventory.addItemStackToInventory(output.copy())){
+              stack.stackSize -= 1;
+              tile.clear();
+            }
+          } else {
+            if(tile.isFilled()){
+              if(player.inventory.addItemStackToInventory(new ItemStack(Apothecary.itemPoisonFailed, 1))){
                 stack.stackSize -= 1;
                 tile.clear();
-                world.markBlockForUpdate(x, y, z);
-              }
-            } else {
-              if(tile.isFilled()){
-                if(player.inventory.addItemStackToInventory(new ItemStack(Apothecary.itemPoisonFailed, 1))){
-                  stack.stackSize -= 1;
-                  tile.clear();
-                  world.markBlockForUpdate(x, y, z);
-                }
               }
             }
           }
@@ -88,7 +83,6 @@ extends BlockContainer(Material.iron){
             tile.fill();
             stack.stackSize -= 1;
             player.inventory.addItemStackToInventory(new ItemStack(Items.bucket));
-            world.markBlockForUpdate(x, y, z);
           }
         }
     }
@@ -114,7 +108,6 @@ extends BlockContainer(Material.iron){
       if(tile.addItem(stack)){
         item.setDead();
         world.markBlockForUpdate(x, y, z);
-        tile.markDirty();
       }
     }
   }

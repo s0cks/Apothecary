@@ -144,10 +144,4 @@ extends TileEntity{
     this.items(this.ptr) = stack;
     return true;
   }
-
-  def sendUpdate(): Unit ={
-    if(this.worldObj != null && !this.worldObj.isRemote){
-
-    }
-  }
 }
